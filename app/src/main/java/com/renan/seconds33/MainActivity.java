@@ -100,9 +100,11 @@ public class MainActivity extends AppCompatActivity {
                 teste++;
                 if (chtempo.getText().equals("00:33")) {
 
-                    Toast.makeText(getBaseContext(), "ACALME-SE!",
-                            Toast.LENGTH_SHORT).show();
-// if score > score salvo no banco, atualizar aqui
+                    Toast.makeText(getBaseContext(), "SCORE :" + String.valueOf(click),
+                            Toast.LENGTH_LONG).show();
+
+                    // if score > score salvo no banco, atualizar aqui
+
                     finish();
                     startActivity(getIntent());
                 }
