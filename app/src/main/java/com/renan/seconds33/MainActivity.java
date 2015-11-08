@@ -16,6 +16,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.renan.seconds33.DAO.PontuacaoDao;
+import com.renan.seconds33.model.Pontuacao;
+
 public class MainActivity extends AppCompatActivity {
     ImageButton b1;
     ImageButton b2;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     int click = 0;
     public int teste = 0;
     AlertDialog builder;
+    PontuacaoDao pontuacaoDao;
+    Pontuacao model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         txtScore = (TextView) findViewById(R.id.txt_score);
         chtempo = (Chronometer) findViewById(R.id.ch_tempo);
         inicio = true;
+
+        //==============================Declara DB Pontuacao
+        pontuacaoDao = new PontuacaoDao(this);
+        model = pontuacaoDao.buscarPontuacaoPorID(1);
+        txtScore.setText("Best: " + String.valueOf(model.getScore()));
 
     }
 
@@ -100,16 +110,57 @@ public class MainActivity extends AppCompatActivity {
                 teste++;
                 if (chtempo.getText().equals("00:33")) {
 
-                    Toast.makeText(getBaseContext(), "SCORE :" + String.valueOf(click),
-                            Toast.LENGTH_LONG).show();
+                    // Toast.makeText(getBaseContext(), "SCORE :" + String.valueOf(click), Toast.LENGTH_LONG).show();
 
-                    // if score > score salvo no banco, atualizar aqui
+                    //================================ if score > score salvo no banco, atualizar aqui
+                    if (model.getScore() < click) {
 
-                    finish();
-                    startActivity(getIntent());
+                        model.set_id(1);
+                        model.setScore(click);
+                        long resultado = pontuacaoDao.AtualizarPontuacao(model);
+                        if (resultado != -1) {
+                            //  Toast.makeText(getBaseContext(), "Salvo",
+                            //          Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getBaseContext(), "Erro",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                        msg();
+                    } else {
+                        msgSad();
+                    }
+
                 }
 
             }
         });
+    }
+
+    public void msg() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("RECORD!!");
+        alertDialog.setMessage("Score: " + String.valueOf(click));
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        alertDialog.show();
+    }
+
+
+    public void msgSad() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Maybe tomorrow");
+        alertDialog.setMessage("Score: " + String.valueOf(click));
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        alertDialog.show();
     }
 }
