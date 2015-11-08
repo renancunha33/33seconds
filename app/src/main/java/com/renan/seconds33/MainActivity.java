@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             public void onChronometerTick(Chronometer chronometer) {
                 teste++;
                 if (chtempo.getText().equals("00:33")) {
+                    chtempo.stop();
                     //================================ if score > score salvo no banco, atualizar aqui
                     if (model.getScore() < click) {
 
@@ -169,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("RECORD!!");
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setMessage("Score: " + String.valueOf(click));
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -199,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Maybe tomorrow");
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setMessage("Score: " + String.valueOf(click));
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
