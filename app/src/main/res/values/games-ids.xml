@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">122459572221</string>
+    <string name="package_name">com.renan.seconds33</string>
+    <string name="achievement_100_clicks">CgkI_Y-jmcgDEAIQAQ</string>
+    <string name="achievement_250_clicks">CgkI_Y-jmcgDEAIQAg</string>
+    <string name="achievement_350_clicks">CgkI_Y-jmcgDEAIQAw</string>
+    <string name="achievement_desito">CgkI_Y-jmcgDEAIQBA</string>
+    <string name="achievement_33">CgkI_Y-jmcgDEAIQBQ</string>
+    <string name="leaderboard_best_score">CgkI_Y-jmcgDEAIQBg</string>
+</resources>
