@@ -27,17 +27,17 @@ import com.renan.seconds33.DAO.PontuacaoDao;
 import com.renan.seconds33.model.Pontuacao;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    ImageButton b1;
-    ImageButton b2;
-    ImageButton titulo;
-    TextView txtScore;
-    Chronometer chtempo;
+    public ImageButton b1;
+    public ImageButton b2;
+    public ImageButton titulo;
+    public TextView txtScore;
+    public Chronometer chtempo;
     boolean inicio, ch = false;
-    int click = 0;
+    public int click = 0;
     public int teste = 0;
-    PontuacaoDao pontuacaoDao;
-    Pontuacao model;
-    GoogleApiClient mGoogleApiClient;
+    public PontuacaoDao pontuacaoDao;
+    public Pontuacao model;
+    public GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +132,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         model.set_id(1);
                         model.setScore(click);
                         long resultado = pontuacaoDao.AtualizarPontuacao(model);
-                        Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_best_score), click);
+                        try {
+                            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_best_score), Long.valueOf(click));
+                        } catch (Exception e) {
+                            //do notthing
+                        }
                         if (resultado != -1) {
                             //  Toast.makeText(getBaseContext(), "Salvo",
                             //          Toast.LENGTH_LONG).show();
@@ -153,20 +157,33 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void msg() {
-        if (click > 100) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_100_clicks));
-        }
-        if (click > 250) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_250_clicks));
-        }
-        if (click > 350) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_350_clicks));
-        }
-        if (click == 1) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_desito));
-        }
-        if (click == 33) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_33));
+        try {
+            if (click > 100) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_100_clicks));
+            }
+            if (click > 250) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_250_clicks));
+            }
+            if (click > 350) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_350_clicks));
+            }
+            if (click == 1) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_desito));
+            }
+            if (click == 33) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_33));
+            }
+            if (click > 400) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_400_clicks));
+            }
+            if (click == 42) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_resposta_de_tudo));
+            }
+            if (click == 69) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement____));
+            }
+        } catch (Exception e) {
+            //do notthing
         }
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("RECORD!!");
@@ -184,20 +201,33 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
     public void msgSad() {
-        if (click > 100) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_100_clicks));
-        }
-        if (click > 250) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_250_clicks));
-        }
-        if (click > 350) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_350_clicks));
-        }
-        if (click == 1) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_desito));
-        }
-        if (click == 33) {
-            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_33));
+        try {
+            if (click > 100) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_100_clicks));
+            }
+            if (click > 250) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_250_clicks));
+            }
+            if (click > 350) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_350_clicks));
+            }
+            if (click == 1) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_desito));
+            }
+            if (click == 33) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_33));
+            }
+            if (click > 400) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_400_clicks));
+            }
+            if (click == 42) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_resposta_de_tudo));
+            }
+            if (click == 69) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement____));
+            }
+        } catch (Exception e) {
+            //do notthing
         }
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Maybe tomorrow");
