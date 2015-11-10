@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.*;
+import com.google.android.gms.games.Game;
 import com.google.android.gms.plus.Plus;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
@@ -69,6 +70,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         pontuacaoDao = new PontuacaoDao(this);
         model = pontuacaoDao.buscarPontuacaoPorID(1);
         txtScore.setText("Best: " + String.valueOf(model.getScore()));
+        int best = model.getScore();
+        try {
+            checkar(best);
+        } catch (Exception e) {
+            //Do nothing
+        }
 
     }
 
@@ -137,6 +144,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         } catch (Exception e) {
                             //do notthing
                         }
+                        try {
+                            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, getString(R.string.leaderboard_best_score)), 100);
+                        } catch (Exception e) {
+                            //do notthing
+                        }
+
                         if (resultado != -1) {
                             //  Toast.makeText(getBaseContext(), "Salvo",
                             //          Toast.LENGTH_LONG).show();
@@ -158,13 +171,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     public void msg() {
         try {
-            if (click > 100) {
+            if (click >= 100) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_100_clicks));
             }
-            if (click > 250) {
+            if (click >= 250) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_250_clicks));
             }
-            if (click > 350) {
+            if (click >= 350) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_350_clicks));
             }
             if (click == 1) {
@@ -173,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             if (click == 33) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_33));
             }
-            if (click > 400) {
+            if (click >= 400) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_400_clicks));
             }
             if (click == 42) {
@@ -202,13 +215,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     public void msgSad() {
         try {
-            if (click > 100) {
+            if (click >= 100) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_100_clicks));
             }
-            if (click > 250) {
+            if (click >= 250) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_250_clicks));
             }
-            if (click > 350) {
+            if (click >= 350) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_350_clicks));
             }
             if (click == 1) {
@@ -217,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             if (click == 33) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_33));
             }
-            if (click > 400) {
+            if (click >= 400) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_400_clicks));
             }
             if (click == 42) {
@@ -317,5 +330,43 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onStop();
         Log.d(TAG, "onStart(): not disconnect");
         // mGoogleApiClient.disconnect();
+    }
+
+    public void checkar(int click) {
+        try {
+            if (click >= 100) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_100_clicks));
+            }
+            if (click >= 250) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_250_clicks));
+            }
+            if (click >= 350) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_350_clicks));
+            }
+            if (click == 1) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_desito));
+            }
+            if (click == 33) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_33));
+            }
+            if (click >= 400) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_400_clicks));
+            }
+            if (click == 42) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_resposta_de_tudo));
+            }
+            if (click == 69) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement____));
+            }
+        } catch (Exception e) {
+            //do notthing
+        }
+    }
+    public void verplacares(){
+        try {
+            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, getString(R.string.leaderboard_best_score)), 100);
+        } catch (Exception e) {
+            //do notthing
+        }
     }
 }
