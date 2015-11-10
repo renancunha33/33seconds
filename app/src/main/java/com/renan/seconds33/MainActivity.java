@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             //do notthing
         }
     }
-    public void verplacares(){
+    public void verplacares(View v){
         try {
             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, getString(R.string.leaderboard_best_score)), 100);
         } catch (Exception e) {
