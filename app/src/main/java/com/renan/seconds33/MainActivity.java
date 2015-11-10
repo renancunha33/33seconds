@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         pontuacaoDao = new PontuacaoDao(this);
         model = pontuacaoDao.buscarPontuacaoPorID(1);
         txtScore.setText("Best: " + String.valueOf(model.getScore()));
+
+        //==============================Verifica se a pontuação já esta gravada na PlayGames
         int best = model.getScore();
         try {
             checkar(best);
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         model.setScore(click);
                         long resultado = pontuacaoDao.AtualizarPontuacao(model);
                         try {
+                            //================================== PLACAR dos jogadores
                             Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_best_score), Long.valueOf(click));
                         } catch (Exception e) {
                             //do notthing
@@ -151,13 +154,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         }
 
                         if (resultado != -1) {
-                            //  Toast.makeText(getBaseContext(), "Salvo",
-                            //          Toast.LENGTH_LONG).show();
+                            //Do nothing
                         } else {
                             Toast.makeText(getBaseContext(), "Erro",
                                     Toast.LENGTH_LONG).show();
                         }
-
+                        // alertdialogs + verificacao de desbloq. de conquista
                         msg();
                     } else {
                         msgSad();
@@ -364,6 +366,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
     public void verplacares(View v){
         try {
+            //================================== PLACAR dos jogadores
             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, getString(R.string.leaderboard_best_score)), 100);
         } catch (Exception e) {
             //do notthing
