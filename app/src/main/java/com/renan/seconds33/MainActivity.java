@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 teste++;
-                if (chtempo.getText().equals("00:33")) {
+                if (chtempo.getText().toString().contains("00:33")) {
                     chtempo.stop();
                     //================================ if score > score salvo no banco, atualizar aqui
                     if (model.getScore() < click) {
@@ -364,7 +364,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             //do notthing
         }
     }
-    public void verplacares(View v){
+
+    public void verplacares(View v) {
         try {
             //================================== PLACAR dos jogadores
             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, getString(R.string.leaderboard_best_score)), 100);
