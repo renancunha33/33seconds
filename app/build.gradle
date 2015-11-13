@@ -8,7 +8,7 @@ android {
         applicationId "com.renan.seconds33"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 5
+        versionCode 6
         versionName "1.0.4"
     }
     buildTypes {
