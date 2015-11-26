@@ -24,6 +24,7 @@ import com.google.example.games.basegameutils.BaseGameUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 import com.renan.seconds33.DAO.PontuacaoDao;
 import com.renan.seconds33.model.Pontuacao;
 
@@ -48,7 +49,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         if (getSupportActionBar() != null) getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        try {
+            AdBuddiz.setPublisherKey("e3412479-676d-4d36-8586-645fe18f885a"); //chave adbuddiz
+            AdBuddiz.cacheAds(this);
+        } catch (Exception e) {
+            //Do nothing
+        }
         //================================ GOOGLE API
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -133,8 +139,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 teste++;
-                if (chtempo.getText().toString().contains("00:33")||chtempo.getText().toString().contains("0:33")) {
+                if (chtempo.getText().toString().contains("00:33") || chtempo.getText().toString().contains("0:33")) {
                     chtempo.stop();
+                    try {
+                        AdBuddiz.showAd(MainActivity.this);
+                    } catch (Exception e) {
+                        //Do nothing
+                    }
                     //================================ if score > score salvo no banco, atualizar aqui
                     if (model.getScore() < click) {
 

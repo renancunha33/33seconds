@@ -8,8 +8,8 @@ android {
         applicationId "com.renan.seconds33"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 6
-        versionName "1.0.4"
+        versionCode 7
+        versionName "1.0.5"
     }
     buildTypes {
         release {
@@ -30,4 +30,12 @@ dependencies {
 dependencies {
     compile project(':BaseGameUtils')
     // ...
+}
+dependencies {
+    compile 'com.purplebrain.adbuddiz.sdk:AdBuddiz-Java:3.+'
+}
+repositories {
+    maven {
+        url 'http://repository.adbuddiz.com/maven'
+    }
 }
