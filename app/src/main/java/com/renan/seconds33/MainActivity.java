@@ -208,6 +208,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             if (click == 69) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement____));
             }
+            if (click >= 600) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_fingers_of_gosh));
+            }
         } catch (Exception e) {
             //do notthing
         }
@@ -251,6 +254,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
             if (click == 69) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement____));
+            }
+            if (click >= 600) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_fingers_of_gosh));
             }
         } catch (Exception e) {
             //do notthing
@@ -370,6 +376,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
             if (click == 69) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement____));
+            }
+            if (click >= 600) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_fingers_of_gosh));
             }
         } catch (Exception e) {
             //do notthing
